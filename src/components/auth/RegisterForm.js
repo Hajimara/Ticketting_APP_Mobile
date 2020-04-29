@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Dimensions} from 'react-native';
+import {Dimensions, Text, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 
 const {width} = Dimensions.get('screen');
@@ -71,7 +71,23 @@ const RegisterButton = styled.Text`
   font-weight: bold;
   color: white;
 `;
-const RegisterForm = ({navigation}) => {
+const RegisterForm = ({
+  navigation,
+  accountId,
+  setAccountId,
+  password,
+  setPassword,
+  passwordConfirm,
+  setPasswordConfirm,
+  username,
+  setUsername,
+  address,
+  setAddress,
+  phoneNumber,
+  setPhoneNumber,
+  onSubmit,
+  error,
+}) => {
   return (
     // <KeyboardAvoidingView
     //   style={{backgroundColor: 'white'}}
@@ -83,20 +99,54 @@ const RegisterForm = ({navigation}) => {
           <Title>Sign Up</Title>
         </TitleWapper>
         <ActiveWapper>
-          <Input style={{marginTop: 30}} />
-          <Input />
-          <Input />
-          <Input />
-          <Input />
-          <Input />
+          <Input
+            style={{marginTop: 30}}
+            value={accountId}
+            placeholder="accountId"
+            onChangeText={(text) => setAccountId(text)}
+          />
+          <Input
+            value={password}
+            placeholder="password"
+            onChangeText={(text) => setPassword(text)}
+            secureTextEntry={true}
+          />
+          <Input
+            value={passwordConfirm}
+            placeholder="passwordConfirm"
+            onChangeText={(text) => setPasswordConfirm(text)}
+            secureTextEntry={true}
+          />
+          <Input
+            value={username}
+            placeholder="username"
+            onChangeText={(text) => setUsername(text)}
+          />
+          <Input
+            value={address}
+            placeholder="address"
+            onChangeText={(text) => setAddress(text)}
+            keyboardType={'email-address'}
+          />
+          <Input
+            value={phoneNumber}
+            placeholder="phoneNumber"
+            onChangeText={(text) => setPhoneNumber(text)}
+            keyboardType={'phone-pad'}
+          />
           <ButtonWapper style={{marginBottom: 80}}>
             <GobackWrapper onPress={() => navigation.goBack()}>
               <GobackButton>GoBack</GobackButton>
             </GobackWrapper>
-            <RegisterWrapper>
+            <RegisterWrapper onPress={() => onSubmit()}>
               <RegisterButton>Sign Up</RegisterButton>
             </RegisterWrapper>
           </ButtonWapper>
+          {error && (
+            <View style={{position: 'absolute', bottom: 40, left: 0}}>
+              <Text style={{color: 'red'}}>{error}</Text>
+            </View>
+          )}
         </ActiveWapper>
       </RegisterFormBox>
     </ScrollView>

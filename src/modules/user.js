@@ -21,7 +21,7 @@ const [
 const USER_INITIALIZE = 'payment/USER_INITIALIZE';
 
 export const userInitalize = createAction(USER_INITIALIZE);
-export const tempSetUser = createAction(TEMP_SET_USER, (user) => user);
+export const tempSetUser = createAction(TEMP_SET_USER, (user) => user); //새로고침 이후 임시 로그인
 export const check = createAction(CHECK);
 export const logout = createAction(LOGOUT);
 export const userInfo = createAction(USER_INFO, ({user}) => ({user}));

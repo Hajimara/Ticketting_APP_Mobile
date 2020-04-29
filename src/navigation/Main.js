@@ -53,22 +53,20 @@ const tabs = () => {
 const MainNavigator = createStackNavigator();
 const Main = () => {
   return (
-    <NavigationContainer>
-      <MainNavigator.Navigator
-        screenOptions={
-          {
-            // headerBackTitleVisible: false,
-            // headerBackImage: () => <BackBtn />,
-          }
-        }>
-        <MainNavigator.Screen
-          name="tabs"
-          component={tabs}
-          options={{headerShown: false}}
-          independent={true}
-        />
-      </MainNavigator.Navigator>
-    </NavigationContainer>
+    <MainNavigator.Navigator
+      screenOptions={
+        {
+          // headerBackTitleVisible: false,
+          // headerBackImage: () => <BackBtn />,
+        }
+      }>
+      <MainNavigator.Screen
+        name="tabs"
+        component={tabs}
+        options={{headerShown: false}}
+        independent={true}
+      />
+    </MainNavigator.Navigator>
   );
 };
 

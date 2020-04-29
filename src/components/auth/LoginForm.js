@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Dimensions} from 'react-native';
+import {Dimensions, Text} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 
 const {width} = Dimensions.get('screen');
@@ -71,7 +71,16 @@ const LoginButton = styled.Text`
   font-size: 24px;
   color: white;
 `;
-const LoginForm = ({navigation}) => {
+
+const LoginForm = ({
+  navigation,
+  accountId,
+  setAccountId,
+  password,
+  setPassword,
+  onSubmit,
+  error,
+}) => {
   return (
     // <KeyboardAvoidingView
     //   style={{backgroundColor: 'white'}}
@@ -83,16 +92,28 @@ const LoginForm = ({navigation}) => {
           <Title>Sign In</Title>
         </TitleWapper>
         <ActiveWapper>
-          <Input style={{marginTop: 80}} />
-          <Input />
+          <Input
+            value={accountId}
+            autoCapitalize="none"
+            placeholder="accountId"
+            onChangeText={(text) => setAccountId(text)}
+            style={{marginTop: 80}}
+          />
+          <Input
+            value={password}
+            secureTextEntry={true}
+            placeholder="password"
+            onChangeText={(text) => setPassword(text)}
+          />
           <ButtonWapper style={{marginBottom: 10, marginTop: 30}}>
             <GobackWrapper onPress={() => navigation.goBack()}>
               <GobackButton>GoBack</GobackButton>
             </GobackWrapper>
-            <LoginWrapper>
+            <LoginWrapper onPress={() => onSubmit()}>
               <LoginButton>Sign In</LoginButton>
             </LoginWrapper>
           </ButtonWapper>
+          <Text style={{color: 'red'}}>{error}</Text>
         </ActiveWapper>
       </LoginFormBox>
     </ScrollView>

@@ -1,14 +1,11 @@
 import React from 'react';
 import Gate from './src/navigation/Gate';
 import {Provider} from 'react-redux';
-import {createStore, applyMiddleware} from 'redux';
-import rootReducer, {rootSaga} from './src/modules';
-import createSagaMiddleware from 'redux-saga';
+import {rootSaga} from './src/modules';
 import {AsyncStorage} from '@react-native-community/async-storage';
 import {tempSetUser, check} from './src/modules/user';
-
-const sagaMiddleware = createSagaMiddleware();
-const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+import {PersistGate} from 'redux-persist/integration/react';
+import {store, sagaMiddleware, persistor} from './src/lib/configureStore';
 
 async function loadUser() {
   try {
@@ -31,7 +28,9 @@ const App = () => {
   return (
     <>
       <Provider store={store}>
-        <Gate />
+        <PersistGate loading={null} persistor={persistor}>
+          <Gate />
+        </PersistGate>
       </Provider>
     </>
   );
